@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Vilmate</title>
+    <style>
+        .my_div {
+            width: 100px;
+            height: 100px;
+            border: 1px solid black;
+            text-align: center;
+            vertical-align: middle;
+            line-height: 100px;
+            transition: transform 0.5s ease;
+            cursor: pointer;
+        }
+
+        .my_div:hover {
+            transform: scale(1.1);
+        }
+    </style>
+</head>
+<body>
+<script>
+    for (let i = 1; i <= 100; i++) {
+        const div = document.createElement('div');
+        div.className = 'my_div';
+        div.innerText = 'div' + i;
+        document.body.appendChild(div);
+    }
+
+    const divElements = document.querySelectorAll('.my_div');
+    divElements.forEach(div => {
+        let isClicked = false;
+        let originalParent = div.parentNode;
+        let originalNextSibling = div.nextElementSibling;
+
+        div.addEventListener('click', () => {
+            if (!isClicked) {
+                originalParent.insertBefore(div, originalParent.firstChild);
+            } else {
+                originalParent.insertBefore(div, originalNextSibling);
+            }
+
+            isClicked = !isClicked;
+        });
+    });
+</script>
+</body>
+</html>
